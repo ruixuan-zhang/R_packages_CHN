@@ -1,0 +1,27 @@
+project:
+  type: book
+
+book:
+  title: "R_package_2e_CHN"
+  author: "Ruixuan Zhang"
+  date: "8/18/2023"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - part: C1_index.qmd
+      chapters:
+        - TheWholeGame.qmd
+    - summary.qmd
+    - references.qmd
+  page-navigation: true
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+

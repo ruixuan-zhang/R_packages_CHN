@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "TheWholeGame.html#加载-devtools-和它的好伙伴们",
+    "href": "TheWholeGame.html#加载-devtools-和它的好伙伴们",
+    "title": "3  The Whole Game",
+    "section": "3.1 加载 devtools 和它的好伙伴们",
+    "text": "3.1 加载 devtools 和它的好伙伴们\n你可以在任何一个活跃的 R session 中启动你的包。即，无论你是在以前的项目 (project) 里，还是在新的项目里。我们目前使用函数以保证我们为这个包创建一新的项目\n加载 devtools 软件包，它是一组软件包的公共界面，支持软件包开发的各个方面。其中最明显的是 usethis 软件包，你会看到它也在加载中。\n\nlibrary(devtools)\npackageVersion(\"devtools\")"
+  },
+  {
+    "objectID": "TheWholeGame.html#示例程序包-regexcite",
+    "href": "TheWholeGame.html#示例程序包-regexcite",
+    "title": "3  The Whole Game",
+    "section": "3.2 示例程序包: regexcite",
+    "text": "3.2 示例程序包: regexcite\n为了帮助您了解整个过程，我们使用 devtools 的各种功能从头开始构建一个小型玩具软件包，其中包含已发布软件包中常见的功能：\n\n满足特定需求的函数，在本例中是用于和正则表达式的”助手”。\n版本控制和开放式开发流程。\n\n这在您的工作中完全是可选项，但强烈推荐。您将看到 Git 和 GitHub 如何帮助我们公开示例 package 的所有中间阶段。\n\n访问安装、获取帮助和检查质量的既定工作流程。\n\n通过 roxygen2 获取单个功能的文档。\n使用 testthat 进行单元测试。\n通过可执行的 README.Rmd 为整个软件包提供文档。\n\n\n我们将该软件包称为 regexcite，其中包含的几个函数能让使用正则表达式的常见任务变得更简单。请注意，这些函数非常简单，我们在此只是将它们作为指导你完成软件包开发过程的一种手段。如果您正在寻找正则表达式的实际帮助工具，有几个合适的 R 软件包可以解决这个问题：\n\nstringr\nstringi\nrex\nrematch2\n\nregexcite 软件包本身只是演示使用 devtools 开发软件包的典型工作流程的一个工具。"
+  },
+  {
+    "objectID": "TheWholeGame.html#预期结果",
+    "href": "TheWholeGame.html#预期结果",
+    "title": "3  The Whole Game",
+    "section": "3.3 预期结果",
+    "text": "3.3 预期结果\n在开发 regexcite 软件包的过程中，我们使用 Git 版本控制系统对其进行跟踪。这完全是可选项，你当然也可以不执行。一个附带好处是，我们最终会将它连接到 GitHub 上的远程仓库，这意味着你可以通过访问 GitHub 上的 regexcite : https://github.com/jennybc/regexcite，看到我们正在努力实现的辉煌成果。通过查看提交历史，尤其是差异，你可以清楚地看到以下流程中每一步的变化。"
+  },
+  {
+    "objectID": "TheWholeGame.html#create_package",
+    "href": "TheWholeGame.html#create_package",
+    "title": "3  The Whole Game",
+    "section": "3.4 create_package()",
+    "text": "3.4 create_package()\n调用 create_package()，在计算机上的某个目录中初始化一个新软件包。如果该目录还不存在（通常是这种情况），create_package() 会自动创建该目录。有关创建软件包的更多信息，请参见第 Fundamental development workflows (开发流程的基石) 这一节。\n慎重选择在计算机上创建此软件包的位置。它可能应该在你的主目录下，与你的其他 R 项目放在一起。它不应嵌套在另一个 RStudio 项目、R 软件包或 Git repo 中。也不能放在 R 包库中，因为 R 包库中存放的是已经构建和安装的 R 包。将我们在此创建的源代码包转换为已安装的软件包，是 devtools 的部分功能。不要试图让 devtools 代劳！\n选择好要创建该软件包的位置后，将所选路径代入 create_package()调用，如下所示：\n\n# create_package(\"../R_pkgs/regexcite/\")\ncreate_package(\"~/path/to/regexcite\")\n\n在创建本书时，我们必须在临时目录下工作，因为本书是在云服务器中非交互式创建的。在幕后，我们执行自己的 create_package() 命令，但如果我们的输出结果与你的有些不同，请不要惊讶。\n\n#&gt; ✔ Creating '/tmp/RtmpjM1mCs/regexcite/'\n#&gt; ✔ Setting active project to '/tmp/RtmpjM1mCs/regexcite'\n#&gt; ✔ Creating 'R/'\n#&gt; ✔ Writing 'DESCRIPTION'\n#&gt; Package: regexcite\n#&gt; Title: What the Package Does (One Line, Title Case)\n#&gt; Version: 0.0.0.9000\n#&gt; Authors@R (parsed):\n#&gt;     * First Last &lt;first.last@example.com&gt; [aut, cre] (YOUR-ORCID-ID)\n#&gt; Description: What the package does (one paragraph).\n#&gt; License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a\n#&gt;     license\n#&gt; Encoding: UTF-8\n#&gt; Roxygen: list(markdown = TRUE)\n#&gt; RoxygenNote: 7.2.3\n#&gt; ✔ Writing 'NAMESPACE'\n#&gt; ✔ Writing 'regexcite.Rproj'\n#&gt; ✔ Adding '^regexcite\\\\.Rproj$' to '.Rbuildignore'\n#&gt; ✔ Adding '.Rproj.user' to '.gitignore'\n#&gt; ✔ Adding '^\\\\.Rproj\\\\.user$' to '.Rbuildignore'\n#&gt; ✔ Setting active project to '&lt;no active project&gt;'\n\n如果你在 RStudio 中工作，你会发现自己进入了一个新的 RStudio 实例，并打开了新的 regexcite 包（和项目）。如果需要手动操作，请导航到该目录并双击 regexcite.Rproj。RStudio 会对软件包进行特殊处理，现在你应该能在 “环境(Environment)”和 “历史(History)”的同一窗格中看到 “构建(Build)”选项卡(tab)。\n你可能需要再次调用 library(devtools)，因为 create_package()可能已将你放入新软件包的全新 R 会话中。\n\nlibrary(devtools)\n\n这个新目录里有什么，它也是一个 R 软件包，可能还是一个 RStudio 项目？下面是一个列表（在本地，您可以查看 “文件 (Files)”窗格(pane)）：\n\n\n\nPath\nType\n\n\n\n\n.Rbuildignore\nfile\n\n\n.gitignore\nfile\n\n\nDESCRIPTION\nfile\n\n\nNAMESPACE\nfile\n\n\nR\ndirectory\n\n\nregexcite.Rproj\nfile\n\n\n\n\n.Rbuildignore 列出了我们需要的文件，但在从源代码构建 R 包时不应包含这些文件。如果你没有使用 RStudio，create_package() 一开始可能不会创建这个文件（也不会创建 .gitignore），因为没有需要忽略的 RStudio 相关机制。不过，不管你使用的是什么编辑器，你都可能会在某个时候产生对 .Rbuildignore 的需求。在 Package Structure and State (包的结构和状态) 这一节将对此进行详细讨论。\n.Rproj.user 是 RStudio 内部使用的目录。\n.gitignore 预计了 Git 的使用情况，并告诉 Git 忽略一些由 R 和 RStudio 创建的标准幕后文件。即使你不打算使用 Git，这也是无害的。\nDESCRIPTION 提供了软件包的元数据。我们将很快对其进行编辑，第 9 章将介绍 DESCRIPTION 文件的一般主题。\nNAMESPACE 声明了软件包导出供外部使用的函数，以及软件包从其他软件包导入的外部函数。此时，它是空的，只有一个注释，声明这是一个不应该手工编辑的文件。 R/ 目录是软件包的 “业务端”。它将很快包含函数定义的 .R 文件。\nregexcite.Rproj 是使该目录成为 RStudio 项目的文件。即使你不使用 RStudio，这个文件也是无害的。你也可以使用 create_package(..., rstudio = FALSE) 阻止创建该文件。更多内容请参见第 4.2 节。"
+  },
+  {
+    "objectID": "TheWholeGame.html#use_git",
+    "href": "TheWholeGame.html#use_git",
+    "title": "3  The Whole Game",
+    "section": "3.5 use_git()",
+    "text": "3.5 use_git()\nregexcite 目录是一个 R 源码包和一个 RStudio 项目。现在我们使用 use_git()，让它也成为一个 Git 仓库。(顺便说一句，use_git() 可以在任何项目中使用，无论它是否是一个 R 软件包）。\n\nuse_git()\n#&gt; ✔ Initialising Git repo\n#&gt; ✔ Adding '.Rhistory', '.Rdata', '.httr-oauth', '.DS_Store', '.quarto' to '.gitignore'\n\n在交互式会话中，我们会询问你是否要在这里提交一些文件，你应该接受这个提议。\n那么软件包有什么变化呢？只有 .git 目录的创建，它在大多数情况下都是隐藏的，包括 RStudio 文件浏览器。它的存在证明我们确实在这里初始化了一个 Git 仓库。\n\n.git -&gt; directory\n\n如果您正在使用 RStudio，它可能会请求在此项目中重新启动自己，您应该这样做。你可以手动退出，然后双击 regexcite.Rproj 重新启动 RStudio。现在，除了软件包开发支持外，您还可以在 “环境/历史/构建”窗格的 “Git”选项卡中访问基本的 Git 客户端。\n点击历史记录（Git 窗格中的时钟图标），如果同意，就会看到通过 use_git() 进行的初始提交："
+  },
+  {
+    "objectID": "TheWholeGame.html#写下第一个函数",
+    "href": "TheWholeGame.html#写下第一个函数",
+    "title": "3  The Whole Game",
+    "section": "3.6 写下第一个函数",
+    "text": "3.6 写下第一个函数\n在处理字符串时，一个相当常见的任务是需要将单个字符串拆分成许多部分。基础 R 中的 strsplit() 函数就可以实现这一功能。\n\n(x &lt;- \"alfa,bravo,charlie,delta\")\n#&gt; [1] \"alfa,bravo,charlie,delta\"\nstrsplit(x, split = \",\")\n#&gt; [[1]]\n#&gt; [1] \"alfa\"    \"bravo\"   \"charlie\" \"delta\"\n\n让我们仔细看看返回的值\n\nstr(strsplit(x, split = \",\"))\n#&gt; List of 1\n#&gt;  $ : chr [1:4] \"alfa\" \"bravo\" \"charlie\" \"delta\"\n\n这个返回值的形状常常让人感到惊讶，或者至少给他们带来不便。输入是长度为 1 的字符向量，输出是长度为 1 的列表。从 R 的矢量化基本趋势来看，这完全说得通。但有时这还是有点无奈。通常情况下，你知道你的输入是一个标量，即它只是一个字符串，而你真的希望输出是它各部分的字符向量。\n这就导致 R 用户使用各种方法对结果进行 “解列表 (unlist)”：\n\nunlist(strsplit(x, split = \",\"))\n#&gt; [1] \"alfa\"    \"bravo\"   \"charlie\" \"delta\"\n\nstrsplit(x, split = \",\")[[1]]\n#&gt; [1] \"alfa\"    \"bravo\"   \"charlie\" \"delta\"\n\n第二种更安全的解决方案是 regexcite 开头函数 strsplit1() 的基础。\n\nstrsplit1 &lt;- function(x, split) {\n  strsplit(x, split = split)[[1]]\n}\n\n\n题外话: paste0() 的出现是为了解决将字符串粘贴到一起而不使用分隔符这一极为常见的使用情况。paste0() 被誉为 “统计计算在 21 世纪最具影响力的贡献” strsplit1() 函数非常也鼓舞人心，现在已经成为 stringr 软件包中的一个真正的函数：stringr::str_split_1()！"
+  },
+  {
+    "objectID": "TheWholeGame.html#use_r",
+    "href": "TheWholeGame.html#use_r",
+    "title": "3  The Whole Game",
+    "section": "3.7 use_r()",
+    "text": "3.7 use_r()\n应该把 strsplit1() 的定义放在哪里？将其保存在软件包 R/ 子目录下的 .R 文件中。一个合理的起始位置是为软件包中每个面向用户的函数创建一个新的 .R 文件，并以该函数命名该文件。当你添加更多的函数时，你会希望放宽这一要求，并开始将相关的函数组合在一起。我们将 strsplit1() 的定义保存在 R/strsplit1.R 文件中。\n辅助函数 use_r() 在 R/ 下创建或打开一个脚本。在更成熟的软件包中，当在 .R 文件和相关测试文件之间导航时，它能真正发挥作用。不过，即使是在这里，它也能让你在 Untitled4 中工作时不至于太得意忘形。\n\nuse_r(\"strsplit1\")\n\n将 strsplit1() 的定义且仅将 strsplit1() 的定义放入 R/strsplit1.R 文件并保存。R/strsplit1.R 文件不应包含我们最近执行过的任何其他代码 (top-level code)，例如输入 x 的定义、library(devtools) 或 use_git()(不依赖别的内容)。这预示着，当你从编写 R 脚本过渡到 R 包时，你需要做出调整。软件包和脚本使用不同的机制来声明它们对其他软件包的依赖性，并存储示例或测试代码。我们将在第 6 章 (R code) 中进一步探讨。"
+  },
+  {
+    "objectID": "TheWholeGame.html#load_all",
+    "href": "TheWholeGame.html#load_all",
+    "title": "3  The Whole Game",
+    "section": "3.8 Load_all()",
+    "text": "3.8 Load_all()\n如何测试 strsplit1()？如果这是一个普通的 R 脚本，我们可以使用 RStudio 将函数定义发送到 R 控制台，并在全局环境中定义 strsplit1()。或者我们可以调用 source(\"R/strsplit1.R\")。不过，对于软件包开发，devtools 提供了一种更强大的方法。\n调用 load_all()，就可以使用 strsplit1() 进行实验。\n\nload_all()\n#&gt; ℹ Loading regexcite\n\n现在调用 strsplit1(x) 看看效果如何。\n\n(x &lt;- \"alfa,bravo,charlie,delta\")\n#&gt; [1] \"alfa,bravo,charlie,delta\"\nstrsplit1(x, split = \",\")\n#&gt; [1] \"alfa\"    \"bravo\"   \"charlie\" \"delta\"\n\n请注意，load_all() 使 strsplit1() 函数可用，尽管它并不存在于全局环境中。\n\nexists(\"strsplit1\", where = globalenv(), inherits = FALSE)\n#&gt; [1] FALSE\n\n如果看到的是 TRUE 而不是 FALSE，则表明您仍在使用面向脚本的工作流程和源代码函数。下面是回到正轨的方法：\n\n清理全局环境并重启 R。\n使用 library(devtools) 重新连接 devtools，并使用 load_all() 重新加载 regexcite。\n重新定义测试输入 x 并再次调用 strsplit1(x,split=\",\")。这样就可以了！\n再次运行 exists(\"strsplit1\", where = globalenv(), inherits = FALSE) 就会看到 FALSE。\n\nload_all() 模拟了构建、安装和附加 regexcite 软件包的过程。随着软件包中的函数越来越多，有的已导出，有的未导出，有的相互调用，有的调用了依赖软件包中的函数，与测试全局环境中定义的函数相比，load_all() 能让你更准确地了解软件包的开发过程。此外，与实际构建、安装和附加软件包相比，load_all() 可以更快地进行迭代。有关 load_all() 的更多信息，请参见第 4.4 节。\n回顾一下我们迄今为止所做的工作：\n\n我们编写了第一个函数 strsplit1()，用于将字符串拆分为字符向量（而不是包含字符向量的列表）。\n我们使用 load_all()，快速将该函数用于交互式使用，就像我们构建并安装了 regexcite，并通过 library(regexcite) 将其连接起来一样。\n\n\nRStudio 在 “Build”菜单、“More”&gt;“Load All”的 “Build”pane 以及键盘快捷键 Ctrl + Shift + L（Windows 和 Linux）或 Cmd + Shift + L（macOS）中提供 load_all()。"
+  },
+  {
+    "objectID": "TheWholeGame.html#commit-strsplit1",
+    "href": "TheWholeGame.html#commit-strsplit1",
+    "title": "3  The Whole Game",
+    "section": "3.9 Commit strsplit1()",
+    "text": "3.9 Commit strsplit1()\n如果您使用 Git，请使用您喜欢的方法提交新的 R/strsplit1.R 文件。我们在幕后这样做，下面是相关的差异。\n\ndiff --git a/R/strsplit1.R b/R/strsplit1.R\nnew file mode 100644\nindex 0000000..29efb88\n--- /dev/null\n+++ b/R/strsplit1.R\n@@ -0,0 +1,3 @@\n+strsplit1 &lt;- function(x, split) {\n+  strsplit(x, split = split)[[1]]\n+}\n\n在之后的每一步，我们都会提交这些修改，你可以在这个页面查看这些提交记录"
+  },
+  {
+    "objectID": "TheWholeGame.html#check",
+    "href": "TheWholeGame.html#check",
+    "title": "3  The Whole Game",
+    "section": "3.10 check()",
+    "text": "3.10 check()\n我们有非正式的经验证据证明 strsplit1() 是有效的。但我们如何确定 regexcite 软件包中的所有活动部件都能正常工作呢？在增加了这么一个小部件之后，进行这样的检查似乎有些愚蠢，但养成经常检查的习惯还是有好处的。\n在 shell 中执行的 R CMD check 是检查 R 软件包是否正常工作的黄金标准。check() 是一种无需离开 R 会话即可运行的便捷方法。\n请注意，check() 会产生大量输出，并针对交互式消费进行了优化。我们在此将其拦截，只提供一个摘要。你的本地 check() 输出会有所不同。\n\ncheck()\n\n\n── R CMD check results ─────────────────── regexcite 0.0.0.9000 ────\nDuration: 9.2s\n\n❯ checking DESCRIPTION meta-information ... WARNING\n  Non-standard license specification:\n    `use_mit_license()`, `use_gpl3_license()` or friends to pick a\n    license\n  Standardizable: FALSE\n\n0 errors ✔ | 1 warning ✖ | 0 notes ✔\n\n必须实际阅读检查结果！尽早并经常处理问题。这就像 .R 和 .Rmd 文件的增量开发一样。在全面检查是否一切正常的间隔时间越长，就越难发现和解决问题。\n此时，我们希望出现 1 次警告（以及 0 次错误和 0 次注释）：\n\nNon-standard license specification:\n  `use_mit_license()`, `use_gpl3_license()` or friends to pick a\n  license\n\n我们很快就会解决这个问题，具体做法就是按它说的做。有关 check() 的更多信息，请参见第 4.5 节。\n\nRstudio 的 Build 菜单里有 check() 在 Build pane 通过 Check 或者快捷键 Ctrl + Shift + E (Win & Linux) 或者 Cmd + Shift + E (macOS)"
+  },
+  {
+    "objectID": "intro.html#引言",
+    "href": "intro.html#引言",
+    "title": "2  Introduction",
+    "section": "2.1 引言",
+    "text": "2.1 引言\n在 R 语言中，可共享代码的基本单位是包 (packages)。包将代码、数据、文档和测试捆绑在一起，易于与他人共享。截至 2023 年 3 月，R 综合档案网络（Comprehensive R Archive Network，简称 CRAN）上有超过 19000 个软件包可用。这些种类繁多的软件包是 R 如此成功的原因之一：很可能有人已经解决了你正在研究的问题，而你可以通过下载他们的软件包从他们的工作中获益。\n如果你正在阅读本书，那么你已经知道如何通过以下方式使用软件包：\n\n通过 CRAN 进行安装 install.packages(\"x\")\n通过 library(\"x\") 或 library(x) 使用它们\n通过 package?x 和 help(package = \"x\") 查询帮助\n\n本书的目的是教你如何开发包，这样你就可以编写自己的包，而不仅仅是使用别人的软件包。为什么要编写软件包？一个令人信服的理由是，你有想与他人共享的代码。将代码打包成软件包，可以方便其他人使用，因为他们和你一样，已经知道如何使用软件包。如果将代码打包，任何 R 用户都可以轻松下载、安装并学习如何使用。\n不过，即使你从不共享代码，包也是有用的。正如 Hilary Parker 在介绍包时所说的那样”说真的，使用包并不一定非要共享代码（虽然这也是一个额外的好处！）。它是为了节省自己的时间”。在软件包中组织代码能让你的生活更轻松，因为软件包自带约定俗成的规则。例如，R 代码放在 R/，测试放在 tests/，数据放在 data/。这些约定很有帮助，因为\n\n它们节省时间--你无需考虑组织项目的最佳方式，只需按照模板操作即可。\n标准化的约定带来标准化的工具--如果你遵循R包的规范，你就可以免费获得许多工具。\n\n甚至还可以使用软件包来构建数据分析（Marwick, Boettiger, and Mullen (2018a) or Marwick, Boettiger, and Mullen (2018b)），不过我们不会在此深入探讨这一用例。\n\n2.1.1 哲学\n本书信奉我们的软件包开发理念：任何可以自动化的事情都应该自动化。尽可能减少手工操作。尽可能多地使用函数。我们的目标是把时间花在思考你想让软件包做什么上，而不是考虑软件包结构的细枝末节。\n这一理念主要是通过 devtools 软件包来实现的，该软件包是一套 R 函数的公众形象，可自动执行常见的开发任务。2018 年 10 月发布的 2.0.0 版本标志着其内部重组为一组更聚焦的软件包，devtools 更像是一个元软件包 (meta-package)。usethis 包是你最有可能直接交互的子包；我们将在第 2.2 节解释 devtools 和 usethis 之间的关系。\n一如既往，devtools 的目标是尽可能简化软件包开发。它囊括了 Hadley Wickham 开发的最佳实践，这些实践最初来自于他多年多产的个人开发经验。最近，他在 Posit（前身为 RStudio）组建了一支开发团队，他们共同管理着数百个开源 R 软件包，包括那些被称为 tidyverse 的软件包。这个团队的影响力使我们能够以非凡的规模探索所有可能的错误。幸运的是，这也为我们提供了机会，在专家和富有同情心的同事的陪伴下，对成功和失败进行反思。我们试图开发出让软件包的维护者和用户都能更愉快地使用软件包的方法。devtools 元软件包就是将这些经验具体化的地方。\ndevtools 与 RStudio 携手合作，我们认为 RStudio 是大多数 R 用户的最佳开发环境。目前，最流行的 RStudio 替代方案是启用了 R 扩展的 Visual Studio Code（VS Code）。这可能是一个有价值且功能强大的环境，但需要更多的设置和定制工作。\n\nEmacs Speaks Statistics (ESS) 的用户会发现，本书中描述的许多工作流程也可以在这里找到。对于那些忠实于 vim 的用户， 我们推荐使用 Nvim-R plugin.\n\ndevtools 和 RStudio 一起将您与软件包构建过程中的底层细节隔离开来。当你开始开发更多软件包时，我们强烈建议你了解更多这些细节。要了解软件包开发的官方细节，最好的资源始终是官方编写的《R 扩展手册》 以及它的 quarto 版本。不过，如果你不熟悉软件包的基础知识，这本手册可能很难理解。这本手册也很详尽，涵盖了所有可能的软件包组件，而不是像本书那样只关注最常见、最有用的组件。如果你已经掌握了基础知识，并想了解 R 引擎盖下发生了什么，那么《 R 扩展手册》将是一个有用的资源。\n\n\n2.1.2 本书的内容\n本书的第一部分将为你提供开始软件包开发旅程所需的所有工具，我们强烈建议你按顺序阅读。在第 1 章中，我们首先介绍了一个小型软件包的完整开发过程。在详细介绍 R 软件包的关键组件之前，我们将先描绘全貌并提出工作流程建议。在第 2 章中，你将学习如何为软件包开发准备系统；在第 3 章中，你将学习软件包的基本结构，以及不同状态下的结构差异。接下来，在第 4 章中，我们将介绍软件包开发人员经常遇到的核心工作流程。本书的第一部分以另一个案例研究（第 5 章）结束，这次的重点是如何将脚本转换为软件包，并讨论在转换过程中会遇到的挑战。\n本书其余部分可根据需要阅读。在开发过程中遇到不同主题时，可以在各章之间进行选择。\n首先，我们介绍软件包的关键组件：第 6 章讨论代码的存放位置以及如何组织代码，第 7 章介绍如何在软件包中包含数据，第 8 章涉及一些不太重要的文件和目录，这些都是需要讨论的内容。\n接下来，我们将深入研究软件包元数据，从第 9 章中的 “描述”（DESCRIPTION）开始。然后，我们将深入探讨依赖关系。在第 10 章中，我们将介绍采用依赖关系的成本和收益，并提供一些有关软件包命名空间和搜索路径的技术背景。在第 11 章中，我们将重点讨论实际问题，例如如何在软件包的不同部分使用不同类型的依赖关系。这也是我们讨论导出函数的地方，因为导出函数可以让其他软件包和项目依赖于你的软件包。最后，我们将在第 12 章讨论许可问题。\n为了确保你的软件包能按设计运行（并在你进行修改时继续运行），测试你的代码是必不可少的，因此接下来的三章将介绍测试的艺术和科学。第 13 章让你开始使用 testthat 软件包进行基础测试。第 14 章教你如何以最有效的方式设计和组织测试。最后，我们将在第 15 章中结束测试的讲解，该章将教你高级技能，以应对具有挑战性的情况。\n如果你想让其他人（包括未来的你！）了解如何使用你的软件包中的函数，你就需要记录它们。第 16 章让你开始使用 roxygen2 来记录软件包中的函数。只有当你知道要查找什么函数时，函数文档才会有帮助，所以接下来的第 17 章我们将讨论 vignettes，它可以帮助你将软件包作为一个整体进行文档记录。最后，我们将在第 18 章讨论其他重要的标记文件，如 README.md 和 NEWS.md，并在第 19 章使用 pkgdown 创建软件包网站。\n最后，本书将重新审视开发实践，例如使用版本控制和持续集成的好处（第 20 章）。最后，我们将讨论软件包的生命周期（第 21 章），包括在 CRAN 上发布软件包（第 22 章）。\n要学的东西很多，但不要感到不知所措。从有用功能的最小子集开始（例如，仅仅是一个 R/ 目录！），然后逐步积累。套用禅宗僧侣 Shunryu Suzuki 的一句话 “Each package is perfect the way it is - and it can use a little improvement”.\n\n\n2.1.3 本书不包含的内容\n还有一些特定的做法，我们在这里几乎没有涉及，原因很简单，因为我们使用得还不够多，没有什么特别的见解。这是否意味着我们不鼓励这些做法呢？也许不是，因为我们会尽量明确地告诉你我们认为你应该避免的做法。因此，如果这里没有涵盖某些内容，那只是意味着有几百个大量使用的 R 软件包在构建时并没有对该技术进行有意义的依赖。这应该促使你评估一下，你的开发需求与我们的需求真正不重叠的可能性有多大。但有时答案显然是 “是”，在这种情况下，您只需参考其他资源即可。"
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "4  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  }
+]

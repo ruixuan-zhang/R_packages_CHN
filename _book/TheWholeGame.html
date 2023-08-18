@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R_package_2e_CHN - 3&nbsp; The Whole Game</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./summary.html" rel="next">
+<link href="./C1_index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./C1_index.html">Getting Started</a></li><li class="breadcrumb-item"><a href="./TheWholeGame.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Whole Game</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R_package_2e_CHN</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Index</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./C1_index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TheWholeGame.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Whole Game</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#加载-devtools-和它的好伙伴们" id="toc-加载-devtools-和它的好伙伴们" class="nav-link active" data-scroll-target="#加载-devtools-和它的好伙伴们"><span class="header-section-number">3.1</span> 加载 devtools 和它的好伙伴们</a></li>
+  <li><a href="#示例程序包-regexcite" id="toc-示例程序包-regexcite" class="nav-link" data-scroll-target="#示例程序包-regexcite"><span class="header-section-number">3.2</span> 示例程序包: <code>regexcite</code></a></li>
+  <li><a href="#预期结果" id="toc-预期结果" class="nav-link" data-scroll-target="#预期结果"><span class="header-section-number">3.3</span> 预期结果</a></li>
+  <li><a href="#create_package" id="toc-create_package" class="nav-link" data-scroll-target="#create_package"><span class="header-section-number">3.4</span> <code>create_package()</code></a></li>
+  <li><a href="#use_git" id="toc-use_git" class="nav-link" data-scroll-target="#use_git"><span class="header-section-number">3.5</span> <code>use_git()</code></a></li>
+  <li><a href="#写下第一个函数" id="toc-写下第一个函数" class="nav-link" data-scroll-target="#写下第一个函数"><span class="header-section-number">3.6</span> 写下第一个函数</a></li>
+  <li><a href="#use_r" id="toc-use_r" class="nav-link" data-scroll-target="#use_r"><span class="header-section-number">3.7</span> <code>use_r()</code></a></li>
+  <li><a href="#load_all" id="toc-load_all" class="nav-link" data-scroll-target="#load_all"><span class="header-section-number">3.8</span> <code>Load_all()</code></a></li>
+  <li><a href="#commit-strsplit1" id="toc-commit-strsplit1" class="nav-link" data-scroll-target="#commit-strsplit1"><span class="header-section-number">3.9</span> Commit <code>strsplit1()</code></a></li>
+  <li><a href="#check" id="toc-check" class="nav-link" data-scroll-target="#check"><span class="header-section-number">3.10</span> <code>check()</code></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Whole Game</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><strong><em>剧透警报!</em></strong><br>
+<br>
+本章将介绍一个小型玩具软件包的开发过程。在我们开始详细讨论 R 软件包的关键组件之前，本章旨在描绘大图并提出工作流程建议。<br>
+<br>
+为了保持节奏明快，我们利用了 <code>devtools</code> 软件包和 RStudio IDE 中的现代便利功能。在后面的章节中，我们将更明确地介绍这些辅助工具的作用。<br>
+<br>
+本章内容自成体系，完成练习并不是继续学习本书其他内容的严格要求，但我们强烈建议你跟我们一起创建这个玩具包。</p>
+<section id="加载-devtools-和它的好伙伴们" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="加载-devtools-和它的好伙伴们"><span class="header-section-number">3.1</span> 加载 devtools 和它的好伙伴们</h2>
+<p>你可以在任何一个活跃的 R session 中启动你的包。即，无论你是在以前的项目 (project) 里，还是在新的项目里。我们目前使用函数以保证我们为这个包创建一新的项目</p>
+<p>加载 devtools 软件包，它是一组软件包的公共界面，支持软件包开发的各个方面。其中最明显的是 usethis 软件包，你会看到它也在加载中。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"devtools"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="示例程序包-regexcite" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="示例程序包-regexcite"><span class="header-section-number">3.2</span> 示例程序包: <code>regexcite</code></h2>
+<p>为了帮助您了解整个过程，我们使用 <code>devtools</code> 的各种功能从头开始构建一个小型玩具软件包，其中包含已发布软件包中常见的功能：</p>
+<ul>
+<li><p>满足特定需求的函数，在本例中是用于和正则表达式的”助手”。</p></li>
+<li><p>版本控制和开放式开发流程。</p>
+<ul>
+<li>这在您的工作中完全是可选项，但强烈推荐。您将看到 Git 和 GitHub 如何帮助我们公开示例 package 的所有中间阶段。</li>
+</ul></li>
+<li><p>访问安装、获取帮助和检查质量的既定工作流程。</p>
+<ul>
+<li><p>通过 <code>roxygen2</code> 获取单个功能的文档。</p></li>
+<li><p>使用 <code>testthat</code> 进行单元测试。</p></li>
+<li><p>通过可执行的 README.Rmd 为整个软件包提供文档。</p></li>
+</ul></li>
+</ul>
+<p>我们将该软件包称为 <strong><code>regexcite</code></strong>，其中包含的几个函数能让使用正则表达式的常见任务变得更简单。请注意，这些函数非常简单，我们在此只是将它们作为指导你完成软件包开发过程的一种手段。如果您正在寻找正则表达式的实际帮助工具，有几个合适的 R 软件包可以解决这个问题：</p>
+<ul>
+<li><p><a href="https://stringr.tidyverse.org/"><code>stringr</code></a></p></li>
+<li><p><a href="https://stringi.gagolewski.com/"><code>stringi</code></a></p></li>
+<li><p><a href="https://cran.r-project.org/package=rex"><code>rex</code></a></p></li>
+<li><p><a href="https://cran.r-project.org/package=rematch2"><code>rematch2</code></a></p></li>
+</ul>
+<p><code>regexcite</code> 软件包本身只是演示使用 devtools 开发软件包的典型工作流程的一个工具。</p>
+</section>
+<section id="预期结果" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="预期结果"><span class="header-section-number">3.3</span> 预期结果</h2>
+<p>在开发 <code>regexcite</code> 软件包的过程中，我们使用 Git 版本控制系统对其进行跟踪。这完全是可选项，你当然也可以不执行。一个附带好处是，我们最终会将它连接到 GitHub 上的远程仓库，这意味着你可以通过访问 GitHub 上的 <code>regexcite</code> : https://github.com/jennybc/regexcite，看到我们正在努力实现的辉煌成果。通过查看提交历史，尤其是差异，你可以清楚地看到以下流程中每一步的变化。</p>
+</section>
+<section id="create_package" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="create_package"><span class="header-section-number">3.4</span> <code>create_package()</code></h2>
+<p>调用 <code>create_package()</code>，在计算机上的某个目录中初始化一个新软件包。如果该目录还不存在（通常是这种情况），<code>create_package()</code> 会自动创建该目录。有关创建软件包的更多信息，请参见第 Fundamental development workflows (开发流程的基石) 这一节。</p>
+<p>慎重选择在计算机上创建此软件包的位置。它可能应该在你的主目录下，与你的其他 R 项目放在一起。它不应嵌套在另一个 RStudio 项目、R 软件包或 Git repo 中。也不能放在 R 包库中，因为 R 包库中存放的是已经构建和安装的 R 包。将我们在此创建的源代码包转换为已安装的软件包，是 <code>devtools</code> 的部分功能。不要试图让 devtools 代劳！</p>
+<p>选择好要创建该软件包的位置后，将所选路径代入 <code>create_package()</code>调用，如下所示：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create_package("../R_pkgs/regexcite/")</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">create_package</span>(<span class="st">"~/path/to/regexcite"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>在创建本书时，我们必须在临时目录下工作，因为本书是在云服务器中非交互式创建的。在幕后，我们执行自己的 <code>create_package()</code> 命令，但如果我们的输出结果与你的有些不同，请不要惊讶。</p>
+<div class="cell">
+<pre class="text cell-code"><code>#&gt; ✔ Creating '/tmp/RtmpjM1mCs/regexcite/'
+#&gt; ✔ Setting active project to '/tmp/RtmpjM1mCs/regexcite'
+#&gt; ✔ Creating 'R/'
+#&gt; ✔ Writing 'DESCRIPTION'
+#&gt; Package: regexcite
+#&gt; Title: What the Package Does (One Line, Title Case)
+#&gt; Version: 0.0.0.9000
+#&gt; Authors@R (parsed):
+#&gt;     * First Last &lt;first.last@example.com&gt; [aut, cre] (YOUR-ORCID-ID)
+#&gt; Description: What the package does (one paragraph).
+#&gt; License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+#&gt;     license
+#&gt; Encoding: UTF-8
+#&gt; Roxygen: list(markdown = TRUE)
+#&gt; RoxygenNote: 7.2.3
+#&gt; ✔ Writing 'NAMESPACE'
+#&gt; ✔ Writing 'regexcite.Rproj'
+#&gt; ✔ Adding '^regexcite\\.Rproj$' to '.Rbuildignore'
+#&gt; ✔ Adding '.Rproj.user' to '.gitignore'
+#&gt; ✔ Adding '^\\.Rproj\\.user$' to '.Rbuildignore'
+#&gt; ✔ Setting active project to '&lt;no active project&gt;'</code></pre>
+</div>
+<p>如果你在 RStudio 中工作，你会发现自己进入了一个新的 RStudio 实例，并打开了新的 <code>regexcite</code> 包（和项目）。如果需要手动操作，请导航到该目录并双击 <code>regexcite.Rproj</code>。RStudio 会对软件包进行特殊处理，现在你应该能在 “环境(Environment)”和 “历史(History)”的同一窗格中看到 “构建(Build)”选项卡(tab)。</p>
+<p>你可能需要再次调用 <code>library(devtools)</code>，因为 <code>create_package()</code>可能已将你放入新软件包的全新 R 会话中。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>这个新目录里有什么，它也是一个 R 软件包，可能还是一个 RStudio 项目？下面是一个列表（在本地，您可以查看 “文件 (Files)”窗格(pane)）：</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Path</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>.Rbuildignore</td>
+<td>file</td>
+</tr>
+<tr class="even">
+<td>.gitignore</td>
+<td>file</td>
+</tr>
+<tr class="odd">
+<td>DESCRIPTION</td>
+<td>file</td>
+</tr>
+<tr class="even">
+<td>NAMESPACE</td>
+<td>file</td>
+</tr>
+<tr class="odd">
+<td>R</td>
+<td>directory</td>
+</tr>
+<tr class="even">
+<td>regexcite.Rproj</td>
+<td>file</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>.Rbuildignore</code> 列出了我们需要的文件，但在从源代码构建 R 包时不应包含这些文件。如果你没有使用 RStudio，create_package() 一开始可能不会创建这个文件（也不会创建 .gitignore），因为没有需要忽略的 RStudio 相关机制。不过，不管你使用的是什么编辑器，你都可能会在某个时候产生对 .Rbuildignore 的需求。在 <em>Package Structure and State</em> (包的结构和状态) 这一节将对此进行详细讨论。</li>
+<li><code>.Rproj.user</code> 是 RStudio 内部使用的目录。</li>
+<li><code>.gitignore</code> 预计了 Git 的使用情况，并告诉 Git 忽略一些由 R 和 RStudio 创建的标准幕后文件。即使你不打算使用 Git，这也是无害的。</li>
+<li><code>DESCRIPTION</code> 提供了软件包的元数据。我们将很快对其进行编辑，第 9 章将介绍 DESCRIPTION 文件的一般主题。</li>
+<li><code>NAMESPACE</code> 声明了软件包导出供外部使用的函数，以及软件包从其他软件包导入的外部函数。此时，它是空的，只有一个注释，声明这是一个不应该手工编辑的文件。 R/ 目录是软件包的 “业务端”。它将很快包含函数定义的 .R 文件。</li>
+<li><code>regexcite.Rproj</code> 是使该目录成为 RStudio 项目的文件。即使你不使用 RStudio，这个文件也是无害的。你也可以使用 <code>create_package(..., rstudio = FALSE)</code> 阻止创建该文件。更多内容请参见第 4.2 节。</li>
+</ul>
+</section>
+<section id="use_git" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="use_git"><span class="header-section-number">3.5</span> <code>use_git()</code></h2>
+<p><code>regexcite</code> 目录是一个 R 源码包和一个 RStudio 项目。现在我们使用 <code>use_git()</code>，让它也成为一个 Git 仓库。(顺便说一句，<code>use_git()</code> 可以在任何项目中使用，无论它是否是一个 R 软件包）。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_git</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✔ Initialising Git repo</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✔ Adding '.Rhistory', '.Rdata', '.httr-oauth', '.DS_Store', '.quarto' to '.gitignore'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>在交互式会话中，我们会询问你是否要在这里提交一些文件，你应该接受这个提议。</p>
+<p>那么软件包有什么变化呢？只有 .git 目录的创建，它在大多数情况下都是隐藏的，包括 RStudio 文件浏览器。它的存在证明我们确实在这里初始化了一个 Git 仓库。</p>
+<div class="cell">
+<pre class="text cell-code"><code>.git -&gt; directory</code></pre>
+</div>
+<p>如果您正在使用 RStudio，它可能会请求在此项目中重新启动自己，您应该这样做。你可以手动退出，然后双击 <code>regexcite.Rproj</code> 重新启动 RStudio。现在，除了软件包开发支持外，您还可以在 “环境/历史/构建”窗格的 “Git”选项卡中访问基本的 Git 客户端。</p>
+<p>点击历史记录（Git 窗格中的时钟图标），如果同意，就会看到通过 use_git() 进行的初始提交：</p>
+</section>
+<section id="写下第一个函数" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="写下第一个函数"><span class="header-section-number">3.6</span> 写下第一个函数</h2>
+<p>在处理字符串时，一个相当常见的任务是需要将单个字符串拆分成许多部分。基础 R 中的 <code>strsplit()</code> 函数就可以实现这一功能。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="st">"alfa,bravo,charlie,delta"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "alfa,bravo,charlie,delta"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit</span>(x, <span class="at">split =</span> <span class="st">","</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "alfa"    "bravo"   "charlie" "delta"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>让我们仔细看看返回的值</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">strsplit</span>(x, <span class="at">split =</span> <span class="st">","</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; List of 1</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ : chr [1:4] "alfa" "bravo" "charlie" "delta"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>这个返回值的形状常常让人感到惊讶，或者至少给他们带来不便。输入是长度为 1 的字符向量，输出是长度为 1 的列表。从 R 的矢量化基本趋势来看，这完全说得通。但有时这还是有点无奈。通常情况下，你知道你的输入是一个标量，即它只是一个字符串，而你真的希望输出是它各部分的字符向量。</p>
+<p>这就导致 R 用户使用各种方法对结果进行 “解列表 (unlist)”：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">strsplit</span>(x, <span class="at">split =</span> <span class="st">","</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "alfa"    "bravo"   "charlie" "delta"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit</span>(x, <span class="at">split =</span> <span class="st">","</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "alfa"    "bravo"   "charlie" "delta"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>第二种更安全的解决方案是 <code>regexcite</code> 开头函数 <code>strsplit1()</code> 的基础。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>strsplit1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, split) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">strsplit</span>(x, <span class="at">split =</span> split)[[<span class="dv">1</span>]]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>题外话: <code>paste0()</code> 的出现是为了解决将字符串粘贴到一起而不使用分隔符这一极为常见的使用情况。<code>paste0()</code> 被誉为 “<a href="https://simplystatistics.org/posts/2013-01-31-paste0-is-statistical-computings-most-influential-contribution-of-the-21st-century/">统计计算在 21 世纪最具影响力的贡献</a>” <code>strsplit1()</code> 函数非常也鼓舞人心，现在已经成为 <code>stringr</code> 软件包中的一个真正的函数：<code>stringr::str_split_1()</code>！</p>
+</blockquote>
+</section>
+<section id="use_r" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="use_r"><span class="header-section-number">3.7</span> <code>use_r()</code></h2>
+<p>应该把 <code>strsplit1()</code> 的定义放在哪里？将其保存在软件包 <code>R/</code> 子目录下的 <code>.R</code> 文件中。一个合理的起始位置是为软件包中每个面向用户的函数创建一个新的 <code>.R</code> 文件，并以该函数命名该文件。当你添加更多的函数时，你会希望放宽这一要求，并开始将相关的函数组合在一起。我们将 strsplit1() 的定义保存在 <code>R/strsplit1.R</code> 文件中。</p>
+<p>辅助函数 <code>use_r()</code> 在 <code>R/</code> 下创建或打开一个脚本。在更成熟的软件包中，当在 <code>.R</code> 文件和相关测试文件之间导航时，它能真正发挥作用。不过，即使是在这里，它也能让你在 <code>Untitled4</code> 中工作时不至于太得意忘形。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_r</span>(<span class="st">"strsplit1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>将 <code>strsplit1()</code> 的定义且仅将 <code>strsplit1()</code> 的定义放入 <code>R/strsplit1.R</code> 文件并保存。<code>R/strsplit1.R</code> 文件不应包含我们最近执行过的任何其他代码 (top-level code)，例如输入 x 的定义、<code>library(devtools)</code> 或 <code>use_git()</code>(不依赖别的内容)。这预示着，当你从编写 R 脚本过渡到 R 包时，你需要做出调整。软件包和脚本使用不同的机制来声明它们对其他软件包的依赖性，并存储示例或测试代码。我们将在第 6 章 (R code) 中进一步探讨。</p>
+</section>
+<section id="load_all" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="load_all"><span class="header-section-number">3.8</span> <code>Load_all()</code></h2>
+<p>如何测试 <code>strsplit1()</code>？如果这是一个普通的 R 脚本，我们可以使用 RStudio 将函数定义发送到 R 控制台，并在全局环境中定义 <code>strsplit1()</code>。或者我们可以调用 <code>source("R/strsplit1.R")</code>。不过，对于软件包开发，<code>devtools</code> 提供了一种更强大的方法。</p>
+<p>调用 <code>load_all()</code>，就可以使用 <code>strsplit1()</code> 进行实验。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load_all</span>()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Loading regexcite</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>现在调用 <code>strsplit1(x)</code> 看看效果如何。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="st">"alfa,bravo,charlie,delta"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "alfa,bravo,charlie,delta"</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit1</span>(x, <span class="at">split =</span> <span class="st">","</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "alfa"    "bravo"   "charlie" "delta"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>请注意，<code>load_all()</code> 使 <code>strsplit1()</code> 函数可用，尽管它并不存在于全局环境中。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exists</span>(<span class="st">"strsplit1"</span>, <span class="at">where =</span> <span class="fu">globalenv</span>(), <span class="at">inherits =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>如果看到的是 <code>TRUE</code> 而不是 <code>FALSE</code>，则表明您仍在使用面向脚本的工作流程和源代码函数。下面是回到正轨的方法：</p>
+<ul>
+<li>清理全局环境并重启 R。</li>
+<li>使用 <code>library(devtools)</code> 重新连接 <code>devtools</code>，并使用 <code>load_all()</code> 重新加载 <code>regexcite</code>。</li>
+<li>重新定义测试输入 x 并再次调用 <code>strsplit1(x,split=",")</code>。这样就可以了！</li>
+<li>再次运行 <code>exists("strsplit1", where = globalenv(), inherits = FALSE)</code> 就会看到 <code>FALSE</code>。</li>
+</ul>
+<p><code>load_all()</code> 模拟了构建、安装和附加 <code>regexcite</code> 软件包的过程。随着软件包中的函数越来越多，有的已导出，有的未导出，有的相互调用，有的调用了依赖软件包中的函数，与测试全局环境中定义的函数相比，<code>load_all()</code> 能让你更准确地了解软件包的开发过程。此外，与实际构建、安装和附加软件包相比，<code>load_all()</code> 可以更快地进行迭代。有关 <code>load_all()</code> 的更多信息，请参见第 4.4 节。</p>
+<p>回顾一下我们迄今为止所做的工作：</p>
+<ul>
+<li>我们编写了第一个函数 <code>strsplit1()</code>，用于将字符串拆分为字符向量（而不是包含字符向量的列表）。</li>
+<li>我们使用 <code>load_all()</code>，快速将该函数用于交互式使用，就像我们构建并安装了 <code>regexcite</code>，并通过 <code>library(regexcite)</code> 将其连接起来一样。</li>
+</ul>
+<blockquote class="blockquote">
+<p>RStudio 在 “<em>Build</em>”菜单、“<em>More</em>”&gt;“<em>Load All</em>”的 “<em>Build</em>”pane 以及键盘快捷键 <em>Ctrl + Shift + L</em>（Windows 和 Linux）或 <em>Cmd + Shift + L</em>（macOS）中提供 <code>load_all()</code>。</p>
+</blockquote>
+</section>
+<section id="commit-strsplit1" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="commit-strsplit1"><span class="header-section-number">3.9</span> Commit <code>strsplit1()</code></h2>
+<p>如果您使用 Git，请使用您喜欢的方法提交新的 <code>R/strsplit1.R</code> 文件。我们在幕后这样做，下面是相关的差异。</p>
+<div class="cell">
+<pre class="text cell-code"><code>diff --git a/R/strsplit1.R b/R/strsplit1.R
+new file mode 100644
+index 0000000..29efb88
+--- /dev/null
++++ b/R/strsplit1.R
+@@ -0,0 +1,3 @@
++strsplit1 &lt;- function(x, split) {
++  strsplit(x, split = split)[[1]]
++}</code></pre>
+</div>
+<p>在之后的每一步，我们都会提交这些修改，你可以在这个<a href="https://github.com/jennybc/regexcite/commits/main">页面</a>查看这些提交记录</p>
+</section>
+<section id="check" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="check"><span class="header-section-number">3.10</span> <code>check()</code></h2>
+<p>我们有非正式的经验证据证明 <code>strsplit1()</code> 是有效的。但我们如何确定 <code>regexcite</code> 软件包中的所有活动部件都能正常工作呢？在增加了这么一个小部件之后，进行这样的检查似乎有些愚蠢，但养成经常检查的习惯还是有好处的。</p>
+<p>在 shell 中执行的 <code>R CMD check</code> 是检查 R 软件包是否正常工作的黄金标准。<code>check()</code> 是一种无需离开 R 会话即可运行的便捷方法。</p>
+<p>请注意，<code>check()</code> 会产生大量输出，并针对交互式消费进行了优化。我们在此将其拦截，只提供一个摘要。你的本地 <code>check()</code> 输出会有所不同。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<pre class="text cell-code"><code>── R CMD check results ─────────────────── regexcite 0.0.0.9000 ────
+Duration: 9.2s
+
+❯ checking DESCRIPTION meta-information ... WARNING
+  Non-standard license specification:
+    `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+  Standardizable: FALSE
+
+0 errors ✔ | 1 warning ✖ | 0 notes ✔</code></pre>
+</div>
+<p><strong><em>必须实际阅读检查结果！</em></strong>尽早并经常处理问题。这就像 <code>.R</code> 和 <code>.Rmd</code> 文件的增量开发一样。在全面检查是否一切正常的间隔时间越长，就越难发现和解决问题。</p>
+<p>此时，我们希望出现 1 次警告（以及 0 次错误和 0 次注释）：</p>
+<div class="cell">
+<pre class="text cell-code"><code>Non-standard license specification:
+  `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+  license</code></pre>
+</div>
+<p>我们很快就会解决这个问题，具体做法就是按它说的做。有关 <code>check()</code> 的更多信息，请参见第 4.5 节。</p>
+<blockquote class="blockquote">
+<p>Rstudio 的 <em>Build</em> 菜单里有 <code>check()</code> 在 <em>Build</em> pane 通过 <em>Check</em> 或者快捷键 Ctrl + Shift + E (Win &amp; Linux) 或者 Cmd + Shift + E (macOS)</p>
+</blockquote>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./C1_index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Getting Started</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./summary.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

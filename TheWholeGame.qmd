@@ -1,0 +1,297 @@
+---
+title: "The Whole Game"
+---
+
+***剧透警报!***\
+\
+本章将介绍一个小型玩具软件包的开发过程。在我们开始详细讨论 R 软件包的关键组件之前，本章旨在描绘大图并提出工作流程建议。\
+\
+为了保持节奏明快，我们利用了 `devtools` 软件包和 RStudio IDE 中的现代便利功能。在后面的章节中，我们将更明确地介绍这些辅助工具的作用。\
+\
+本章内容自成体系，完成练习并不是继续学习本书其他内容的严格要求，但我们强烈建议你跟我们一起创建这个玩具包。
+
+## 加载 devtools 和它的好伙伴们
+
+你可以在任何一个活跃的 R session 中启动你的包。即，无论你是在以前的项目 (project) 里，还是在新的项目里。我们目前使用函数以保证我们为这个包创建一新的项目
+
+加载 devtools 软件包，它是一组软件包的公共界面，支持软件包开发的各个方面。其中最明显的是 usethis 软件包，你会看到它也在加载中。
+
+```{r eval=FALSE, include=TRUE}
+library(devtools)
+packageVersion("devtools")
+```
+
+## 示例程序包: `regexcite`
+
+为了帮助您了解整个过程，我们使用 `devtools` 的各种功能从头开始构建一个小型玩具软件包，其中包含已发布软件包中常见的功能：
+
+-   满足特定需求的函数，在本例中是用于和正则表达式的"助手"。
+
+-   版本控制和开放式开发流程。
+
+    -   这在您的工作中完全是可选项，但强烈推荐。您将看到 Git 和 GitHub 如何帮助我们公开示例 package 的所有中间阶段。
+
+-   访问安装、获取帮助和检查质量的既定工作流程。
+
+    -   通过 `roxygen2` 获取单个功能的文档。
+
+    -   使用 `testthat` 进行单元测试。
+
+    -   通过可执行的 README.Rmd 为整个软件包提供文档。
+
+我们将该软件包称为 **`regexcite`**，其中包含的几个函数能让使用正则表达式的常见任务变得更简单。请注意，这些函数非常简单，我们在此只是将它们作为指导你完成软件包开发过程的一种手段。如果您正在寻找正则表达式的实际帮助工具，有几个合适的 R 软件包可以解决这个问题：
+
+-   [`stringr`](https://stringr.tidyverse.org/)
+
+-   [`stringi`](https://stringi.gagolewski.com/)
+
+-   [`rex`](https://cran.r-project.org/package=rex)
+
+-   [`rematch2`](https://cran.r-project.org/package=rematch2)
+
+`regexcite` 软件包本身只是演示使用 devtools 开发软件包的典型工作流程的一个工具。
+
+## 预期结果
+
+在开发 `regexcite` 软件包的过程中，我们使用 Git 版本控制系统对其进行跟踪。这完全是可选项，你当然也可以不执行。一个附带好处是，我们最终会将它连接到 GitHub 上的远程仓库，这意味着你可以通过访问 GitHub 上的 `regexcite` : https://github.com/jennybc/regexcite，看到我们正在努力实现的辉煌成果。通过查看提交历史，尤其是差异，你可以清楚地看到以下流程中每一步的变化。
+
+## `create_package()`
+
+调用 `create_package()`，在计算机上的某个目录中初始化一个新软件包。如果该目录还不存在（通常是这种情况），`create_package()` 会自动创建该目录。有关创建软件包的更多信息，请参见第 Fundamental development workflows (开发流程的基石) 这一节。
+
+慎重选择在计算机上创建此软件包的位置。它可能应该在你的主目录下，与你的其他 R 项目放在一起。它不应嵌套在另一个 RStudio 项目、R 软件包或 Git repo 中。也不能放在 R 包库中，因为 R 包库中存放的是已经构建和安装的 R 包。将我们在此创建的源代码包转换为已安装的软件包，是 `devtools` 的部分功能。不要试图让 devtools 代劳！
+
+选择好要创建该软件包的位置后，将所选路径代入 `create_package()`调用，如下所示：
+
+```{r eval=FALSE, include=TRUE}
+# create_package("../R_pkgs/regexcite/")
+create_package("~/path/to/regexcite")
+```
+
+在创建本书时，我们必须在临时目录下工作，因为本书是在云服务器中非交互式创建的。在幕后，我们执行自己的 `create_package()` 命令，但如果我们的输出结果与你的有些不同，请不要惊讶。
+
+```{text}
+#> ✔ Creating '/tmp/RtmpjM1mCs/regexcite/'
+#> ✔ Setting active project to '/tmp/RtmpjM1mCs/regexcite'
+#> ✔ Creating 'R/'
+#> ✔ Writing 'DESCRIPTION'
+#> Package: regexcite
+#> Title: What the Package Does (One Line, Title Case)
+#> Version: 0.0.0.9000
+#> Authors@R (parsed):
+#>     * First Last <first.last@example.com> [aut, cre] (YOUR-ORCID-ID)
+#> Description: What the package does (one paragraph).
+#> License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+#>     license
+#> Encoding: UTF-8
+#> Roxygen: list(markdown = TRUE)
+#> RoxygenNote: 7.2.3
+#> ✔ Writing 'NAMESPACE'
+#> ✔ Writing 'regexcite.Rproj'
+#> ✔ Adding '^regexcite\\.Rproj$' to '.Rbuildignore'
+#> ✔ Adding '.Rproj.user' to '.gitignore'
+#> ✔ Adding '^\\.Rproj\\.user$' to '.Rbuildignore'
+#> ✔ Setting active project to '<no active project>'
+```
+
+如果你在 RStudio 中工作，你会发现自己进入了一个新的 RStudio 实例，并打开了新的 `regexcite` 包（和项目）。如果需要手动操作，请导航到该目录并双击 `regexcite.Rproj`。RStudio 会对软件包进行特殊处理，现在你应该能在 "环境(Environment)"和 "历史(History)"的同一窗格中看到 "构建(Build)"选项卡(tab)。
+
+你可能需要再次调用 `library(devtools)`，因为 `create_package()`可能已将你放入新软件包的全新 R 会话中。
+
+```{r eval=FALSE, include=TRUE}
+library(devtools)
+```
+
+这个新目录里有什么，它也是一个 R 软件包，可能还是一个 RStudio 项目？下面是一个列表（在本地，您可以查看 "文件 (Files)"窗格(pane)）：
+
+| Path            | Type      |
+|-----------------|-----------|
+| .Rbuildignore   | file      |
+| .gitignore      | file      |
+| DESCRIPTION     | file      |
+| NAMESPACE       | file      |
+| R               | directory |
+| regexcite.Rproj | file      |
+
+-   `.Rbuildignore` 列出了我们需要的文件，但在从源代码构建 R 包时不应包含这些文件。如果你没有使用 RStudio，create_package() 一开始可能不会创建这个文件（也不会创建 .gitignore），因为没有需要忽略的 RStudio 相关机制。不过，不管你使用的是什么编辑器，你都可能会在某个时候产生对 .Rbuildignore 的需求。在 *Package Structure and State* (包的结构和状态) 这一节将对此进行详细讨论。
+-   `.Rproj.user` 是 RStudio 内部使用的目录。
+-   `.gitignore` 预计了 Git 的使用情况，并告诉 Git 忽略一些由 R 和 RStudio 创建的标准幕后文件。即使你不打算使用 Git，这也是无害的。
+-   `DESCRIPTION` 提供了软件包的元数据。我们将很快对其进行编辑，第 9 章将介绍 DESCRIPTION 文件的一般主题。
+-   `NAMESPACE` 声明了软件包导出供外部使用的函数，以及软件包从其他软件包导入的外部函数。此时，它是空的，只有一个注释，声明这是一个不应该手工编辑的文件。 R/ 目录是软件包的 "业务端"。它将很快包含函数定义的 .R 文件。
+-   `regexcite.Rproj` 是使该目录成为 RStudio 项目的文件。即使你不使用 RStudio，这个文件也是无害的。你也可以使用 `create_package(..., rstudio = FALSE)` 阻止创建该文件。更多内容请参见第 4.2 节。
+
+## `use_git()`
+
+`regexcite` 目录是一个 R 源码包和一个 RStudio 项目。现在我们使用 `use_git()`，让它也成为一个 Git 仓库。(顺便说一句，`use_git()` 可以在任何项目中使用，无论它是否是一个 R 软件包）。
+
+```{r eval=FALSE, include=TRUE}
+use_git()
+#> ✔ Initialising Git repo
+#> ✔ Adding '.Rhistory', '.Rdata', '.httr-oauth', '.DS_Store', '.quarto' to '.gitignore'
+```
+
+在交互式会话中，我们会询问你是否要在这里提交一些文件，你应该接受这个提议。
+
+那么软件包有什么变化呢？只有 .git 目录的创建，它在大多数情况下都是隐藏的，包括 RStudio 文件浏览器。它的存在证明我们确实在这里初始化了一个 Git 仓库。
+
+```{text}
+.git -> directory
+```
+
+如果您正在使用 RStudio，它可能会请求在此项目中重新启动自己，您应该这样做。你可以手动退出，然后双击 `regexcite.Rproj` 重新启动 RStudio。现在，除了软件包开发支持外，您还可以在 "环境/历史/构建"窗格的 "Git"选项卡中访问基本的 Git 客户端。
+
+点击历史记录（Git 窗格中的时钟图标），如果同意，就会看到通过 use_git() 进行的初始提交：
+
+## 写下第一个函数
+
+在处理字符串时，一个相当常见的任务是需要将单个字符串拆分成许多部分。基础 R 中的 `strsplit()` 函数就可以实现这一功能。
+
+```{r eval=FALSE, include=TRUE}
+(x <- "alfa,bravo,charlie,delta")
+#> [1] "alfa,bravo,charlie,delta"
+strsplit(x, split = ",")
+#> [[1]]
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+```
+
+让我们仔细看看返回的值
+
+```{r eval=FALSE, include=TRUE}
+str(strsplit(x, split = ","))
+#> List of 1
+#>  $ : chr [1:4] "alfa" "bravo" "charlie" "delta"
+```
+
+这个返回值的形状常常让人感到惊讶，或者至少给他们带来不便。输入是长度为 1 的字符向量，输出是长度为 1 的列表。从 R 的矢量化基本趋势来看，这完全说得通。但有时这还是有点无奈。通常情况下，你知道你的输入是一个标量，即它只是一个字符串，而你真的希望输出是它各部分的字符向量。
+
+这就导致 R 用户使用各种方法对结果进行 "解列表 (unlist)"：
+
+```{r eval=FALSE, include=TRUE}
+unlist(strsplit(x, split = ","))
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+
+strsplit(x, split = ",")[[1]]
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+```
+
+第二种更安全的解决方案是 `regexcite` 开头函数 `strsplit1()` 的基础。
+
+```{r eval=FALSE, include=TRUE}
+strsplit1 <- function(x, split) {
+  strsplit(x, split = split)[[1]]
+}
+```
+
+> 题外话: `paste0()` 的出现是为了解决将字符串粘贴到一起而不使用分隔符这一极为常见的使用情况。`paste0()` 被誉为 "[统计计算在 21 世纪最具影响力的贡献](https://simplystatistics.org/posts/2013-01-31-paste0-is-statistical-computings-most-influential-contribution-of-the-21st-century/)" `strsplit1()` 函数非常也鼓舞人心，现在已经成为 `stringr` 软件包中的一个真正的函数：`stringr::str_split_1()`！
+
+## `use_r()`
+
+应该把 `strsplit1()` 的定义放在哪里？将其保存在软件包 `R/` 子目录下的 `.R` 文件中。一个合理的起始位置是为软件包中每个面向用户的函数创建一个新的 `.R` 文件，并以该函数命名该文件。当你添加更多的函数时，你会希望放宽这一要求，并开始将相关的函数组合在一起。我们将 strsplit1() 的定义保存在 `R/strsplit1.R` 文件中。
+
+辅助函数 `use_r()` 在 `R/` 下创建或打开一个脚本。在更成熟的软件包中，当在 `.R` 文件和相关测试文件之间导航时，它能真正发挥作用。不过，即使是在这里，它也能让你在 `Untitled4` 中工作时不至于太得意忘形。
+
+```{r eval=FALSE, include=TRUE}
+use_r("strsplit1")
+```
+
+将 `strsplit1()` 的定义且仅将 `strsplit1()` 的定义放入 `R/strsplit1.R` 文件并保存。`R/strsplit1.R` 文件不应包含我们最近执行过的任何其他代码 (top-level code)，例如输入 x 的定义、`library(devtools)` 或 `use_git()`(不依赖别的内容)。这预示着，当你从编写 R 脚本过渡到 R 包时，你需要做出调整。软件包和脚本使用不同的机制来声明它们对其他软件包的依赖性，并存储示例或测试代码。我们将在第 6 章 (R code) 中进一步探讨。
+
+## `Load_all()`
+
+如何测试 `strsplit1()`？如果这是一个普通的 R 脚本，我们可以使用 RStudio 将函数定义发送到 R 控制台，并在全局环境中定义 `strsplit1()`。或者我们可以调用 `source("R/strsplit1.R")`。不过，对于软件包开发，`devtools` 提供了一种更强大的方法。
+
+调用 `load_all()`，就可以使用 `strsplit1()` 进行实验。
+
+```{r eval=FALSE, include=TRUE}
+load_all()
+#> ℹ Loading regexcite
+```
+
+现在调用 `strsplit1(x)` 看看效果如何。
+
+```{r eval=FALSE, include=TRUE}
+(x <- "alfa,bravo,charlie,delta")
+#> [1] "alfa,bravo,charlie,delta"
+strsplit1(x, split = ",")
+#> [1] "alfa"    "bravo"   "charlie" "delta"
+```
+
+请注意，`load_all()` 使 `strsplit1()` 函数可用，尽管它并不存在于全局环境中。
+
+```{r eval=FALSE, include=TRUE}
+exists("strsplit1", where = globalenv(), inherits = FALSE)
+#> [1] FALSE
+```
+
+如果看到的是 `TRUE` 而不是 `FALSE`，则表明您仍在使用面向脚本的工作流程和源代码函数。下面是回到正轨的方法：
+
+-   清理全局环境并重启 R。
+-   使用 `library(devtools)` 重新连接 `devtools`，并使用 `load_all()` 重新加载 `regexcite`。
+-   重新定义测试输入 x 并再次调用 `strsplit1(x,split=",")`。这样就可以了！
+-   再次运行 `exists("strsplit1", where = globalenv(), inherits = FALSE)` 就会看到 `FALSE`。
+
+`load_all()` 模拟了构建、安装和附加 `regexcite` 软件包的过程。随着软件包中的函数越来越多，有的已导出，有的未导出，有的相互调用，有的调用了依赖软件包中的函数，与测试全局环境中定义的函数相比，`load_all()` 能让你更准确地了解软件包的开发过程。此外，与实际构建、安装和附加软件包相比，`load_all()` 可以更快地进行迭代。有关 `load_all()` 的更多信息，请参见第 4.4 节。
+
+回顾一下我们迄今为止所做的工作：
+
+-   我们编写了第一个函数 `strsplit1()`，用于将字符串拆分为字符向量（而不是包含字符向量的列表）。
+-   我们使用 `load_all()`，快速将该函数用于交互式使用，就像我们构建并安装了 `regexcite`，并通过 `library(regexcite)` 将其连接起来一样。
+
+> RStudio 在 "*Build* "菜单、"*More*"\>"*Load All*"的 "*Build* "pane 以及键盘快捷键 *Ctrl + Shift + L*（Windows 和 Linux）或 *Cmd + Shift + L*（macOS）中提供 `load_all()`。
+
+## Commit `strsplit1()`
+
+如果您使用 Git，请使用您喜欢的方法提交新的 `R/strsplit1.R` 文件。我们在幕后这样做，下面是相关的差异。
+
+```{text}
+diff --git a/R/strsplit1.R b/R/strsplit1.R
+new file mode 100644
+index 0000000..29efb88
+--- /dev/null
++++ b/R/strsplit1.R
+@@ -0,0 +1,3 @@
++strsplit1 <- function(x, split) {
++  strsplit(x, split = split)[[1]]
++}
+```
+
+在之后的每一步，我们都会提交这些修改，你可以在这个[页面](https://github.com/jennybc/regexcite/commits/main)查看这些提交记录
+
+## `check()`
+
+我们有非正式的经验证据证明 `strsplit1()` 是有效的。但我们如何确定 `regexcite` 软件包中的所有活动部件都能正常工作呢？在增加了这么一个小部件之后，进行这样的检查似乎有些愚蠢，但养成经常检查的习惯还是有好处的。
+
+在 shell 中执行的 `R CMD check` 是检查 R 软件包是否正常工作的黄金标准。`check()` 是一种无需离开 R 会话即可运行的便捷方法。
+
+请注意，`check()` 会产生大量输出，并针对交互式消费进行了优化。我们在此将其拦截，只提供一个摘要。你的本地 `check()` 输出会有所不同。
+
+```{r eval=FALSE, include=TRUE}
+check()
+```
+
+```{text}
+── R CMD check results ─────────────────── regexcite 0.0.0.9000 ────
+Duration: 9.2s
+
+❯ checking DESCRIPTION meta-information ... WARNING
+  Non-standard license specification:
+    `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+  Standardizable: FALSE
+
+0 errors ✔ | 1 warning ✖ | 0 notes ✔
+```
+
+***必须实际阅读检查结果！***尽早并经常处理问题。这就像 `.R` 和 `.Rmd` 文件的增量开发一样。在全面检查是否一切正常的间隔时间越长，就越难发现和解决问题。
+
+此时，我们希望出现 1 次警告（以及 0 次错误和 0 次注释）：
+
+```{text}
+Non-standard license specification:
+  `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+  license
+```
+
+我们很快就会解决这个问题，具体做法就是按它说的做。有关 `check()` 的更多信息，请参见第 4.5 节。
+
+> Rstudio 的 *Build* 菜单里有 `check()` 在 *Build* pane 通过 *Check* 或者快捷键 Ctrl + Shift + E (Win & Linux) 或者 Cmd + Shift + E (macOS)
